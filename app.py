@@ -6,6 +6,7 @@ import streamlit as st
 from io import BytesIO
 
 # Function to download and process image
+@st.cache(allow_output_mutation=True)
 def process_image(img):
     # Edge Detection filter
     edges = img.filter(ImageFilter.FIND_EDGES)
