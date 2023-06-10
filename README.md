@@ -31,4 +31,4 @@ Open your web browser and go to the address shown in your terminal (usually http
 
 Use the application! You can either upload an image file or enter the URL of an image. Then, click the "Apply Filters and Generate Animation" button to process the image.
 
-This application was created by @jsocarras.
+This application was created by @jsocarras with assitance from GPT4.
