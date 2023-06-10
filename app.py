@@ -4,21 +4,26 @@ import imageio
 import numpy as np
 import streamlit as st
 from io import BytesIO
+import hashlib
 
 # Function to download and process image
-@st.cache_data(allow_output_mutation=True)
 def process_image(img):
     # Edge Detection filter
     edges = img.filter(ImageFilter.FIND_EDGES)
 
+    # Generate unique filenames based on the input image
+    image_hash = hashlib.md5(img.tobytes()).hexdigest()
+    filtered_filename = f"filtered_{image_hash}.jpg"
+    animated_filename = f"animated_{image_hash}.gif"
+
     # Save the filtered image as jpg
-    edges.save("filtered.jpg")
+    edges.save(filtered_filename)
 
     # Generate animated gif
     images = [img, edges]
-    imageio.mimsave('animated.gif', [np.array(im) for im in images], duration=1000, loop=0)
+    imageio.mimsave(animated_filename, [np.array(im) for im in images], duration=1000, loop=0)
 
-    return "filtered.jpg", "animated.gif"
+    return filtered_filename, animated_filename
 
 # Streamlit App
 st.title('Image Filter App')
